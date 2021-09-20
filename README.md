@@ -74,3 +74,25 @@ console.log( html`<h1 id=hello>Hello world!</h1>` );
 quite useful i think. though i will have to update
 the dom myself... (and the library everyone seems
 to use is snabbdom https://github.com/snabbdom/snabbdom)
+
+## tagged template literals
+
+ok who knew javascript was so cool https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates
+
+turns out you can just use backticks to define a `template literal`
+
+```js
+let name = 'karl';
+let str = `hello ${name}`;
+```
+
+and if you prepend the backtick thingy you can use a function to return
+whatever you want...
+
+```js
+let name = 'karl';
+let func = () => {};
+let thin = func`hello ${name}`;
+```
+
+pretty amazing, actually...
