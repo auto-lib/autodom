@@ -1,9 +1,20 @@
 // import * as walk from 'acorn-walk';
 // var walk = require('estree-walker').walk;
 
-import walk from 'estree-walk';
+//import walk from 'estree-walk';
 
-function has_jsx(node) {
+import { walk } from 'estree-walker';
+
+function has_jsx(ast) {
+
+    // walk(ast, {
+    //     enter(node, parent, prop, index) {
+    //       // some code happens
+    //     },
+    //     leave(node, parent, prop, index) {
+    //       // some code happens
+    //     }
+    //   });
 
     // for (var key in node) {
 
@@ -23,16 +34,18 @@ function has_jsx(node) {
 
     // return false;
 
-    let found = false;
-    walk(node, (child, stop) => {
+    // estree-walk (not estree-walker)
+    // let found = false;
+    // walk(node, (child, stop) => {
 
-        // console.log('child', child);
-        if (is_jsx(child)) {
-            stop();
-            found = true;
-        }
+    //     // console.log('child', child);
+    //     if (is_jsx(child)) {
+    //         stop();
+    //         found = true;
+    //     }
 
-    });
+    // });
+
 
     // walk.simple(ast, {
     //     JSXElement: function(node) {
@@ -43,7 +56,7 @@ function has_jsx(node) {
     //     JSXElement: () => {}
     // })
 
-    return found;
+    return false;
 }
 
 function get_jsx(node) {
@@ -65,17 +78,33 @@ export function jsx(ast, original) {
 
     console.time('jsx');
 
-    for (var queue = [ast]; queue.length;) {
-        var node = queue.pop()
-            // handle `node` with a switch statement or whatever
-            // then continue walking using step function:
-        switch (node.type) {
-
-            case 'JSXElement':
-                jnodes.push(node)
+    walk(ast, {
+        enter(node, parent, prop, index) {
+            // some code happens
+            if (node.type == 'JSXElement') {
+                console.log('node', node);
+                console.log('parent', parent);
+                console.log('prop', prop);
+                console.log('index', index);
+                jnodes.push(node);
+            }
+        },
+        leave(node, parent, prop, index) {
+            // some code happens
         }
-        walk.step(node, queue)
-    }
+    });
+    // estree-walk
+    // for (var queue = [ast]; queue.length;) {
+    //     var node = queue.pop()
+    //         // handle `node` with a switch statement or whatever
+    //         // then continue walking using step function:
+    //     switch (node.type) {
+
+    //         case 'JSXElement':
+    //             jnodes.push(node)
+    //     }
+    //     walk.step(node, queue)
+    // }
 
     // walk(ast, {
     //     JSXElement: node => jnodes.push(node)

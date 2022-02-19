@@ -2,13 +2,19 @@ lockfileVersion: 5.3
 
 specifiers:
   estree-walk: ^2.2.0
+  estree-walker: ^3.0.1
 
 dependencies:
   estree-walk: 2.2.0
+  estree-walker: 3.0.1
 
 packages:
 
   /estree-walk/2.2.0:
     resolution: {integrity: sha512-6gUr3kGNVEfL6pcIiGBrSkhoEQPkv8laQy1lUDpaxT4AvlBxf/UYSueOEb6Wq1cG5Ct6xQSkFCHoJcZlijpUAg==}
     engines: {node: '>=4'}
+    dev: false
+
+  /estree-walker/3.0.1:
+    resolution: {integrity: sha512-woY0RUD87WzMBUiZLx8NsYr23N5BKsOMZHhu2hoNRVh6NXGfoiT1KOL8G3UHlJAnEDGmfa5ubNA/AacfG+Kb0g==}
     dev: false
