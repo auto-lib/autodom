@@ -1,0 +1,23 @@
+{
+    "name": "@autolib/autodom",
+    "version": "1.0.0",
+    "description": "Generate web ui elements from auto objects automatically",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/auto-lib/autodom.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/auto-lib/autodom/issues"
+    },
+    "homepage": "https://github.com/auto-lib/autodom#readme",
+    "dependencies": {
+        "estree-walk": "^2.2.0"
+    }
+}
