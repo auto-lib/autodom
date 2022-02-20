@@ -4,6 +4,7 @@
     "description": "Generate web ui elements from auto objects automatically",
     "main": "index.js",
     "scripts": {
+        "dev": "esbuild index.js --bundle --outfile=umd.js --sourcemap --global-name=autodom --watch",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -18,7 +19,11 @@
     },
     "homepage": "https://github.com/auto-lib/autodom#readme",
     "dependencies": {
+        "@autolib/auto": "^1.33.36",
         "estree-walk": "^2.2.0",
         "estree-walker": "^3.0.1"
+    },
+    "devDependencies": {
+        "esbuild": "^0.14.23"
     }
 }

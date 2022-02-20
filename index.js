@@ -4,6 +4,7 @@
 //import walk from 'estree-walk';
 
 import { walk } from 'estree-walker';
+import auto from '@autolib/auto';
 
 function has_jsx(ast) {
 
@@ -72,131 +73,28 @@ function is_jsx(node) {
     return node.type == 'JSXElement';
 }
 
-export function jsx(ast, original) {
+console.log('hello');
 
-    let jnodes = []
+export function render(obj, root) {
+    console.log('render');
+    return;
+    obj['root'] = root;
+    obj['mount'] = _ => _.root.append(_.el);
+    auto(obj);
+};
 
-    console.time('jsx');
+export function jsx(tag, props, children) {
 
-    walk(ast, {
-        enter(node, parent, prop, index) {
-            // some code happens
-            if (node.type == 'JSXElement') {
-                console.log('node', node);
-                console.log('parent', parent);
-                console.log('prop', prop);
-                console.log('index', index);
-                jnodes.push(node);
-            }
-        },
-        leave(node, parent, prop, index) {
-            // some code happens
-        }
-    });
-    // estree-walk
-    // for (var queue = [ast]; queue.length;) {
-    //     var node = queue.pop()
-    //         // handle `node` with a switch statement or whatever
-    //         // then continue walking using step function:
-    //     switch (node.type) {
+    console.log('tags');
 
-    //         case 'JSXElement':
-    //             jnodes.push(node)
-    //     }
-    //     walk.step(node, queue)
-    // }
+    let obj = {};
 
-    // walk(ast, {
-    //     JSXElement: node => jnodes.push(node)
-    // })
+    obj['el'] = document.createElement(tag);
 
-    console.timeEnd('jsx');
+    props.forEach(name => obj[name] = props[name]);
 
+    console.log('obj', obj);
 
-    // remember https://stackoverflow.com/a/53035335
+    return obj;
 
-    let match = jnodes[2];
-
-    let str = original.substring(0, match.start) + '{}' + original.substring(match.end, original.length - 1);
-    // walk(ast, (child, stop) => {
-
-    //     console.log('child', child);
-
-    //     if (is_jsx(child)) {
-    //         console.log('IS_JSX');
-    //         str += get_jsx(child);
-    //         stop();
-    //     } else if (has_jsx(child)) {
-    //         console.log("HAS_JSX");
-    //         //str += jsx(child);
-    //     } else {
-    //         console.log("JUST_STR");
-    //         str += get_str(child, original);
-    //         stop();
-    //     }
-
-    // });
-
-    return str;
-
-    // let str = '';
-
-    // for (var key in node) {
-
-    //     var child = node[key];
-
-    //     console.log('child', child);
-
-    //     if (child) {
-
-    //         if (child.type) {
-
-    //             if (is_jsx(child)) {
-    //                 console.log('IS_JSX');
-    //                 str += get_jsx(node);
-    //             } else if (has_jsx(child)) {
-    //                 console.log("HAS_JSX");
-    //                 str += jsx(node);
-    //             } else {
-    //                 console.log("JUST_STR");
-    //                 str += get_str(node);
-    //             }
-    //         }
-    //         if (Array.isArray(child)) {
-    //             for (var i = 0; i < child.length; i++) {
-    //                 jsx(child[i]);
-    //             }
-    //         }
-    //     }
-    // }
-
-    // return str;
-
-    // Object.keys(ast).forEach(name => {
-    //     console.log(name);
-    // })
-
-    // for (var queue = [node]; queue.length && walking;) {
-    //     node = queue.shift()
-
-    //     // Skip a missing node
-    //     if (!node) continue
-
-    //     console.log(node);
-    // }
-    // acorn walk
-
-    // var features = Object.create(null);
-
-    // walk.simple(ast, {
-    //         JSXElement: function(node) {
-    //             console.log(node);
-    //         },
-    //     }, // https://github.com/acornjs/acorn/issues/829
-    //     {
-    //         ...walk.base,
-    //         JSXElement: () => {}
-    //     })
-
-    // return features;
 };

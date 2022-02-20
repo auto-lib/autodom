@@ -154,3 +154,25 @@ let show = (_) => {
 }
 ```
 
+## babel again
+
+hmmm look at this:
+
+```js
+let x = _ => /*#__PURE__*/_jsxs("div", {
+  children: ["Hello ", _.name]
+});
+```
+
+that's what is produced in babel when we
+input that same function:
+
+```jsx
+let show = (_) => <p>hello {_.name}</p>
+```
+
+maybe we don't need to parse and compile
+the jsx ourselves...
+
+as long as everything is a function of
+some variable ...
